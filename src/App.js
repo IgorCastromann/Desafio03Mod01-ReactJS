@@ -9,13 +9,13 @@ function App() {
   const [projects, setProjects] = useState([])
 
   useEffect(() => {
-    api.get('projects').then(response => {
+    api.get('repositories').then(response => {
         setProjects(response.data)
     })
   }, [])
 
   async function handleAddRepository() {
-    const response = await api.post('projects', {
+    const response = await api.post('repositories', {
       title: `Novo projeto ${Date.now()}`,
       owner: "Igor Castro"
   })
@@ -28,7 +28,7 @@ function App() {
 
   async function handleRemoveRepository(id) {
     
-    await api.delete(`projects/${id}`)
+    await api.delete(`repositories/${id}`)
 
     const projectIndex = projects.findIndex(project => project.id === id) 
     const projectArray = [ ...projects ]; 
